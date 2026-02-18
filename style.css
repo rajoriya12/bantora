@@ -1,0 +1,433 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: #000;
+    color: white;
+    overflow-x: hidden;
+}
+#icons{
+    position:relative;
+    display: flex;
+    width: 30px;
+    height: 30px;
+    gap: 40px;
+    align-items: baseline;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+}
+.logo{
+    justify-content: space-between;
+}
+.hidden{
+    display: none;
+}
+.box {
+    display: flex;
+    align-items: center;
+    background: lightgrey;
+    border-radius: 20px;
+    display: flex;
+    position: relative;
+    left: 90px;
+}
+
+.box input {
+    border: none;
+    background: transparent;
+    padding: 5px 10px;
+    width: 300px;
+    outline: none;
+
+}
+.box input::placeholder{
+    font-size: medium;
+}
+
+#btns {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#btn2 {
+    background: white;
+    color: black;
+    padding: 8px 18px;
+    border-radius: 25px;
+}
+
+
+
+.mainContaner {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+
+
+
+#library {
+    width: 260px;
+    background: #121212;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    
+}
+#library img{
+    width: 25px;
+    filter: invert(1);
+}
+#library li{
+    font-size: 8px;
+    display: flex;
+    border:2px solid beige ;
+    justify-content: space-between;
+    gap: 20px;
+}
+#library h3{
+    font-size: 13px;
+    display: flex;
+    width: 240px;
+    
+}
+.hexa{
+    display: flex;
+    width: 30px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.close-btn {
+    display: none;
+    font-size: 24px;
+    text-align: right;
+    padding: 10px;
+    cursor: pointer;
+}
+
+
+#right {
+    flex: 1;
+    background: #121212;
+    border-radius: 15px;
+    margin: 10px;
+    padding: 15px;
+    overflow-y: auto;
+    padding-bottom: 120px;
+}
+
+
+.cardContener {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #181818;
+    padding: 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    background: #282828;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.card h3 {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.card p {
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+
+.songslist {
+    height: 60vh;
+    overflow-y: auto;
+}
+
+.songslist ul li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.songslist ul li:hover {
+    background: #2a2a2a;
+}
+
+.playbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: #181818;
+    border-top: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.playbar .songinfo {
+    width: 30%;
+}
+
+.sogsbtns {
+    display: flex;
+    gap: 15px;
+}
+
+.seekbaar {
+    width: 90%;
+    height: 4px;
+    background: #444;
+    margin: 8px auto;
+    position: relative;
+}
+
+.circal {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    top: -5px;
+    left: 0;
+}
+
+
+.hamburger {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+
+/* ================= 1700px ================= */
+@media (max-width: 1700px) {
+    .card {
+        margin: 10px 40px;
+    }
+
+    #btns {
+        position: relative;
+        right: 15px;
+    }
+}
+
+
+/* ================= MOBILE (0 – 480px) ================= */
+@media (max-width: 480px) {
+
+    .mainContaner {
+        flex-direction: column;
+    }
+
+    .header {
+        padding: 10px 15px;
+    }
+
+    
+
+    .hamburger {
+        display: block;
+    }
+
+    /* Sidebar */
+    #library {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: #121212;
+        z-index: 1000;
+        transition: 0.3s ease;
+        overflow-y: auto;
+    }
+
+    #library.active {
+        left: 0;
+    }
+
+    .close-btn {
+        display: block;
+        color: white;
+    }
+
+    /* Cards */
+    .card {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    /* Remove hover zoom on mobile */
+    .songslist li:hover {
+        transform: none;
+    }
+
+    /* Playbar */
+    .playbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        height: auto;
+        border-radius: 0;
+        padding: 10px 0;
+    }
+
+    .items {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .playbar .songinfo {
+        width: 90%;
+        text-align: center;
+        font-size: 12px;
+    }
+
+    .seekbaar {
+        width: 90%;
+        margin: 8px auto;
+    }
+
+    .sogsbtns {
+        right: 0;
+        margin-top: 5px;
+    }
+}
+
+
+/* ================= TABLET (481 – 768px) ================= */
+@media (min-width: 481px) and (max-width: 768px) {
+
+    #library {
+        width: 35vw;
+    }
+
+    .card {
+        width: 180px;
+        margin: 10px 10px;
+    }
+
+    .box input {
+        width: 220px;
+    }
+
+    .playbar .songinfo {
+        width: 40%;
+        font-size: 12px;
+    }
+}
+
+
+/* ================= SMALL LAPTOP (769 – 1024px) ================= */
+@media (min-width: 769px) and (max-width: 1024px) {
+
+    #library {
+        width: 30vw;
+    }
+
+    .card {
+        width: 200px;
+        margin: 10px 15px;
+    }
+
+    .box input {
+        width: 280px;
+    }
+}
+
+
+/* ================= LARGE (1025px+) ================= */
+@media (min-width: 1025px) {
+
+    #library {
+        width: 25vw;
+    }
+
+    .card {
+        width: 240px;
+    }
+}
+
+
+/* ================= HAMBURGER BREAKPOINT ================= */
+@media (max-width: 865px) {
+
+    .box,
+    #btns {
+        display: none !important;
+    }
+
+    .hamburger {
+        display: block;
+       font-size: 40px;
+    }
+     #homepng{
+        display: none;
+    }
+    #btns{
+       display: block;
+    }
+
+    #library {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 80%;
+        height: 100vh;
+        background: #121212;
+        z-index: 2000;
+        transition: 0.3s ease;
+        overflow-y: auto;
+    }
+
+    #library.active {
+        left: 0;
+    }
+
+    .close-btn {
+        display: block;
+        color: white;
+    }
+}

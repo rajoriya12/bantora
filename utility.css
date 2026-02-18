@@ -1,0 +1,43 @@
+.logo {
+    filter: invert(1);
+    width: 35px;
+    gap: 10px;
+}
+
+.flex {
+    display: flex;
+}
+
+.fontfamily {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.download-btn {
+    text-decoration: none;
+    display: flex;
+    gap: 10px;
+    color: aliceblue;
+}
+.btn{
+    background-color: transparent;
+    color: gainsboro;
+    font-weight: 600;
+    border: none;
+}
+.margin{
+    margin: 10px;
+}
+.padding{
+    padding: 10px;
+}
+.alingitem{
+    align-items: center;
+}
+.justfycontent{
+    justify-content: center;
+}
+.text{
+    font-size: 20px;
+    padding: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
