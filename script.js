@@ -65,30 +65,13 @@ function formatTime(seconds) {
 }
 
 //  FETCH SONGS
-
 async function getsong(folder) {
-
-    currfolder = folder;
-
-    let a = await fetch("http://127.0.0.1:3000/" + folder);
-    let response = await a.text();
-
-    let div = document.createElement("div");
-    div.innerHTML = response;
-
-    let as = div.getElementsByTagName("a");
-    let song = [];
-
-    for (let index = 0; index < as.length; index++) {
-        let element = as[index];
-
-        if (element.href.endsWith(".mp3")) {
-            song.push(element.href.split(folder)[1]);
-        }
-    }
-
-    return song;
+    currfolder = folder + "/";
+    let res = await fetch(currfolder + "info.json");
+    let data = await res.json();
+    return data;
 }
+
 
 async function displaysongslist() {
 
@@ -127,7 +110,7 @@ async function displaysongslist() {
         }
     }
 
-    // card click
+
     document.querySelectorAll(".card").forEach(function (card) {
 
         card.addEventListener("click", async function () {
@@ -141,49 +124,47 @@ async function displaysongslist() {
             let songUL = document.querySelector(".songslist ul");
             songUL.innerHTML = "";
 
-            let html = "";
-
             for (let i = 0; i < songs.length; i++) {
 
-                html += `
+                songUL.innerHTML += `
     <li class="flex" data-song="${songs[i]}">
-        
         <img src="song.svg" alt="song">
 
         <div class="songinfo">
             <h3>${cleanSongName(songs[i])}</h3>
-            <p>song aritst</p>
+            <p>song artist</p>
         </div>
 
         <div class="hexa flex alingitem">
             <span>Play Now</span>
             <img src="play.svg" alt="play">
         </div>
-
     </li>`;
-            }
+                document.querySelectorAll(".songslist li").forEach(function (item) {
 
+                    item.addEventListener("click", function () {
 
-            songUL.innerHTML = html;
-            document.querySelectorAll(".songslist li").forEach(function (item) {
+                        let track = item.dataset.song;
 
-                item.addEventListener("click", function () {
+                        currentAudio.src = currfolder + track;
+                        currentAudio.play();
+                        play.src = "pause.svg";
 
-                    let track = item.dataset.song;
+                        document.querySelector(".playbar .songinfo").innerHTML =
+                            cleanSongName(track);
+                    });
 
-                    currentAudio.src = currfolder + track;
-                    currentAudio.play();
-                    play.src = "pause.svg";
-
-                    document.querySelector(".playbar .songinfo").innerHTML =
-                        cleanSongName(track);
                 });
 
-            });
+            }
+
 
         });
 
     });
+
+
+
 
 }
 
@@ -391,40 +372,7 @@ async function main() {
         });
 
     });
-    document.querySelectorAll(".playBtn").forEach(function(btn){
-
-    btn.addEventListener("click", async function(e){
-
-        e.stopPropagation();
-
-        let card = btn.closest(".card");
-        let folder = card.dataset.folder;
-
-        if (!folder) return;
-
-        currfolder = "songs/" + folder;
-        songs = await getsong(currfolder);
-
-        let songUL = document.querySelector(".songslist ul");
-        songUL.innerHTML = "";
-
-        for (let i = 0; i < songs.length; i++) {
-
-            songUL.innerHTML += `
-                <li class="flex" data-song="${songs[i]}">
-                    <img src="song.svg">
-                    <div class="songinfo">
-                        <h3>${cleanSongName(songs[i])}</h3>
-                        <p>song artist</p>
-                    </div>
-                </li>`;
-        }
-
-    });
-
-});
-
-    displaysongslist()
+    // displaysongslist()
 
 }
 
