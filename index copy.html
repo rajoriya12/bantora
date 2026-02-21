@@ -1,0 +1,107 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bantora</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="utility.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Salsa&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <div id="maindiv">
+
+        <section class="header">
+            <div class="hamburger">
+                ☰
+            </div>
+
+            <section class="logo flex">
+                <section id="icons">
+                    <img src="logo.png" alt="Spotify-logo">
+                    <img id="homepng" src="home.svg" id="homelogo" alt="home-logo">
+                </section>
+
+                <section class="box flex">
+                    <img src="search.svg" alt="search-icon" style="position: relative; width: 20px; margin-left: 10px;">
+                    <input type="text" style="padding: 20px 30px;" placeholder="what do you want to play">
+                </section>
+            </section>
+
+            <section id="btns">
+                <h2 style="  font-family: Salsa, Boogaloo,cursive; font-weight: 400; font-style: normal;">Bantora</h2>
+            </section>
+        </section>
+
+        <div class="mainContaner flex">
+            <section id="left">
+                <section id="library">
+                    <div class="close-btn">✕</div>
+
+                    <section class="top flex alingitem">
+                        <h4 class="text margin">Your library</h4>
+                        <span class="flex alingitem text margin">
+                            <img class="logo margin width" src="add.svg" alt="">
+                            Create
+                        </span>
+                    </section>
+
+                    <section class="songslist">
+                        <ul class="ul">
+
+                        </ul>
+                    </section>
+
+                </section>
+            </section>
+
+            <section id="right">
+                <div class="heading flex alingitem justfyspace" style="padding: 0px 50px;">
+                    <h3 class="padding">Tranding songs</h3>
+                    <h3 class="showbtn">show all</h3>
+                </div>
+                <div class="cardContener">
+                </div>
+
+                <div class="playbar">
+                    <div class="items">
+                        <div class="songinfo"></div>
+                        <div class="sogsbtns">
+                            <img id="previous" class="play invert" src="previous.svg" alt="previous">
+                            <img id="play" class="play invert" src="play.svg" alt="play">
+                            <img id="next" class="play invert" src="forword.svg" alt="forword">
+                        </div>
+                        <div class="timevol">
+                            <div class="songtime"></div>
+                            <div class="volume">
+                                <img class="vol invert" src="volume.svg" alt="">
+                                <input type="range" class="volrange hidden" min="0" max="1" step="0.01" value="1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="seekbaar">
+                        <div class="circal">
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>

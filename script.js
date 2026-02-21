@@ -67,7 +67,7 @@ function formatTime(seconds) {
 //  FETCH SONGS
 async function getsong(folder) {
     currfolder = folder + "/";
-    let res = await fetch(currfolder + "info.json");
+    let res = await fetch(folder+"/playlist.json");
     let data = await res.json();
     return data;
 }
@@ -140,36 +140,31 @@ async function displaysongslist() {
             <img src="play.svg" alt="play">
         </div>
     </li>`;
-                document.querySelectorAll(".songslist li").forEach(function (item) {
-
-                    item.addEventListener("click", function () {
-
-                        let track = item.dataset.song;
-
-                        currentAudio.src = currfolder + track;
-                        currentAudio.play();
-                        play.src = "pause.svg";
-
-                        document.querySelector(".playbar .songinfo").innerHTML =
-                            cleanSongName(track);
-                    });
-
-                });
-
             }
 
+            // ✅ LISTENER LOOP KE BAAD
+            document.querySelectorAll(".songslist li").forEach(function (item) {
+
+                item.addEventListener("click", function () {
+
+                    let track = item.dataset.song;
+
+                    currentAudio.src = currfolder + track.replace("/", "");
+                    currentAudio.play();
+                    play.src = "pause.svg";
+
+                    document.querySelector(".playbar .songinfo").innerHTML =
+                        cleanSongName(track);
+                });
 
         });
 
-    });
+        }
 
 
+       )});
 
-
-}
-
-
-
+};
 
 // MAIN
 
@@ -206,7 +201,8 @@ async function main() {
 
             let track = item.dataset.song;
 
-            currentAudio.src = currfolder + track;
+            currentAudio.src = currfolder + track.replace("/", "");
+
             currentAudio.play();
 
             play.src = "pause.svg";
@@ -273,7 +269,8 @@ async function main() {
 
         if (index > 0) {
 
-            currentAudio.src = currfolder + songs[index - 1];
+            currentAudio.src = currfolder + songs[index - 1].replace("/", "");
+
             currentAudio.play();
             play.src = "pause.svg";
 
@@ -291,7 +288,8 @@ async function main() {
 
         if (index < songs.length - 1) {
 
-            currentAudio.src = currfolder + songs[index + 1];
+            currentAudio.src = currfolder + songs[index + 1].replace("/", "");
+
             currentAudio.play();
             play.src = "pause.svg";
 
@@ -329,7 +327,8 @@ async function main() {
 
         if (index != -1 && index < songs.length - 1) {
 
-            currentAudio.src = currfolder + songs[index + 1];
+            currentAudio.src = currfolder + songs[index + 1].replace("/", "");
+
             currentAudio.play();
             play.src = "pause.svg";
 
@@ -342,7 +341,8 @@ async function main() {
     // INITIAL LOAD
     if (songs.length > 0) {
 
-        currentAudio.src = currfolder + songs[0];
+        currentAudio.src = currfolder + songs[0].replace("/", "");
+
         currentAudio.pause();
         play.src = "play.svg";
 
@@ -372,7 +372,7 @@ async function main() {
         });
 
     });
-    // displaysongslist()
+    displaysongslist()
 
 }
 
