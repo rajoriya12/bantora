@@ -66,8 +66,8 @@ function formatTime(seconds) {
 
 //  FETCH SONGS
 async function getsong(folder) {
-    currfolder = "public"+folder + "/";
-    let res = await fetch("public"+`${folder}/playlist.json`);
+    currfolder = "public" + folder + "/";
+    let res = await fetch("public/" + `${folder}/playlist.json`);
     let data = await res.json();
     return data;
 }
@@ -77,7 +77,7 @@ async function displaysongslist() {
 
     let cardContener = document.querySelector(".cardContener");
 
-    let a = await fetch(`public/songs/`);
+    let a = await fetch(`/public/songs/`);
     let response = await a.text();
 
     let div = document.createElement("div");
@@ -118,7 +118,7 @@ async function displaysongslist() {
             let folder = card.dataset.folder;
             if (!folder) return;
 
-            currfolder = "songs/" + folder;
+            currfolder = "/songs/" + folder;
             songs = await getsong(currfolder);
 
             let songUL = document.querySelector(".songslist ul");
@@ -148,7 +148,7 @@ async function displaysongslist() {
 
                     let track = item.dataset.song;
 
-                  currentAudio.src = "/" + currfolder + "/" + track.replace("/", "");
+                    currentAudio.src = "/" + currfolder + "/" + track.replace("/", "");
                     currentAudio.play();
                     play.src = "pause.svg";
 
@@ -201,7 +201,7 @@ async function main() {
 
             let track = item.dataset.song;
 
-           currentAudio.src = "/" + currfolder + "/" + track.replace("/", "");
+            currentAudio.src = "/" + currfolder + "/" + track.replace("/", "");
 
             currentAudio.play();
 
