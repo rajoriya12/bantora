@@ -200,8 +200,7 @@ async function main() {
         item.addEventListener("click", function () {
 
             let track = item.dataset.song;
-
-            currentAudio.src = currfolder + "/" + track.replace("/", "");
+            currentAudio.src = currfolder + replace("/", "");
 
             currentAudio.play();
 
