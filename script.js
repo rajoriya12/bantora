@@ -201,7 +201,7 @@ async function main() {
 
             let track = item.dataset.song;
 
-            currentAudio.src = "/" + currfolder + "/" + track.replace("/", "");
+            currentAudio.src = currfolder + "/" + track.replace("/", "");
 
             currentAudio.play();
 
