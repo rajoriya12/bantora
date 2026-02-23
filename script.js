@@ -194,13 +194,12 @@ async function main() {
 
     songUL.innerHTML = html;
 
-    // SONG CLICK
+    // songs click--
     document.querySelectorAll(".songslist li").forEach(function (item) {
 
         item.addEventListener("click", function () {
 
             let track = item.dataset.song;
-
             currentAudio.src = currfolder + "/" + track.replace("/", "");
 
             currentAudio.play();
