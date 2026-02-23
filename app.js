@@ -3,7 +3,6 @@ const path = require("path");
 
 const app = express();
 
-// ⭐ public folder serve
 app.use(express.static(path.join(__dirname, "public")));
 
 app.listen(3000, () => {
