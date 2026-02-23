@@ -66,8 +66,8 @@ function formatTime(seconds) {
 
 //  FETCH SONGS
 async function getsong(folder) {
-    currfolder = "public/"+folder + "/";
-    let res = await fetch("public/"+`${folder}/playlist.json`);
+    currfolder = "public"+folder + "/";
+    let res = await fetch("public"+`${folder}/playlist.json`);
     let data = await res.json();
     return data;
 }
