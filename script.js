@@ -118,7 +118,7 @@ async function displaysongslist() {
             let folder = card.dataset.folder;
             if (!folder) return;
 
-            currfolder = "public/songs/" + folder;
+            currfolder = "songs/" + folder;
             songs = await getsong(currfolder);
 
             let songUL = document.querySelector(".songslist ul");
