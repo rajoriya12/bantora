@@ -148,7 +148,7 @@ async function displaysongslist() {
 
                     let track = item.dataset.song;
 
-                    currentAudio.src = "/" + currfolder + "/" + track.replace("/", "");
+                    currentAudio.src = "/" + currfolder + track.replace("/", "");
                     currentAudio.play();
                     play.src = "pause.svg";
 
@@ -200,7 +200,8 @@ async function main() {
         item.addEventListener("click", function () {
 
             let track = item.dataset.song;
-            currentAudio.src = currfolder + replace("/", " ");
+
+            currentAudio.src = currfolder + "/" + track.replace("/", "");
 
             currentAudio.play();
 
