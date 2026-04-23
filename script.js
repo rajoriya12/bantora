@@ -95,7 +95,7 @@ async function displaysongslist() {
 
             if (songsfonder === "songs") continue;
 
-            let res = await fetch(`http://127.0.0.1:3000/public/songs/${songsfonder}/info.json`);
+            let res = await fetch(`public/songs/lofisongs/info.json`);
             let data = await res.json();
 
             console.log(data);
