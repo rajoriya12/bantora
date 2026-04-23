@@ -8,7 +8,7 @@ let logoSection = document.querySelector(".logo");
 let currentAudio = new Audio();
 let songs;
 let currfolder;
-
+let folders = ["lofisongs", "playlist", "seedhemuat"];
 
 // MOBILE MENU
 
@@ -66,110 +66,100 @@ function formatTime(seconds) {
 
 //  FETCH SONGS
 async function getsong(folder) {
-    currfolder = "public" + folder + "/";
-    let res = await fetch("public/" + `${folder}/playlist.json`);
-    let data = await res.json();
-    return data;
+    currfolder = `./public/songs/${folder}`;
+    let res = await fetch(`${currfolder}/playlist.json`);
+    return await res.json();
 }
-
-
 async function displaysongslist() {
 
     let cardContener = document.querySelector(".cardContener");
-
-    let a = await fetch(`/public/songs/`);
-    let response = await a.text();
-
-    let div = document.createElement("div");
-    div.innerHTML = response;
-
-    let ass = div.getElementsByTagName("a");
-
     cardContener.innerHTML = "";
 
-    for (let e of ass) {
+    let folders = ["lofisongs", "playlist", "seedhemuat"];
 
-        if (e.href.includes("/public/songs/")) {
+    for (let folder of folders) {
 
-            let songsfonder = e.href.split("/").slice(-2)[0];
+        let res = await fetch(`./public/songs/${folder}/info.json`);
+        let data = await res.json();
 
-            if (songsfonder === "songs") continue;
-
-            let res = await fetch(`public/songs/lofisongs/info.json`);
-            let data = await res.json();
-
-            console.log(data);
-
-            cardContener.innerHTML += `
-                <div class="card" data-folder="${songsfonder}">
-                   <img src="/public/songs/${songsfonder}/cover.jpeg">
-                    <div class="playBtn">▶</div>
-                    <h3>${data.tital}</h3>
-                    <p>${data.des}</p>
-                </div>`;
-        }
+        cardContener.innerHTML += `
+        <div class="card" data-folder="${folder}">
+            <img src="./public/songs/${folder}/cover.jpeg">
+            <div class="playBtn">▶</div>
+            <h3>${data.tital}</h3>
+            <p>${data.des}</p>
+        </div>`;
     }
 
-
-    document.querySelectorAll(".card").forEach(function (card) {
+    // click event AFTER cards created
+    document.querySelectorAll(".card").forEach(card => {
 
         card.addEventListener("click", async function () {
 
-            let folder = card.dataset.folder;
-            if (!folder) return;
+            let folder = this.dataset.folder;
 
-            currfolder = "/songs/" + folder;
-            songs = await getsong(currfolder);
+            songs = await getsong(folder);
 
             let songUL = document.querySelector(".songslist ul");
             songUL.innerHTML = "";
 
-            for (let i = 0; i < songs.length; i++) {
-
+            songs.forEach(song => {
                 songUL.innerHTML += `
-    <li class="flex" data-song="${songs[i]}">
-        <img src="song.svg" alt="song">
+                <li class="flex" data-song="${song}">
+                    <img src="song.svg">
+                    <div class="songinfo">
+                        <h3>${cleanSongName(song)}</h3>
+                        <p>song artist</p>
+                    </div>
+                </li>`;
+            });
 
-        <div class="songinfo">
-            <h3>${cleanSongName(songs[i])}</h3>
-            <p>song artist</p>
-        </div>
-
-        <div class="hexa flex alingitem">
-            <span>Play Now</span>
-            <img src="play.svg" alt="play">
-        </div>
-    </li>`;
-            }
-
-            document.querySelectorAll(".songslist li").forEach(function (item) {
+            document.querySelectorAll(".songslist li").forEach(item => {
 
                 item.addEventListener("click", function () {
 
-                    let track = item.dataset.song;
+                    let track = this.dataset.song;
 
-                    currentAudio.src = "/" + currfolder + track.replace("/", "");
+                    currentAudio.src = `${currfolder}/${track.replace("/", "")}`;
                     currentAudio.play();
+
                     play.src = "pause.svg";
 
                     document.querySelector(".playbar .songinfo").innerHTML =
                         cleanSongName(track);
+
+                    document.querySelector(".songtime").innerHTML = "00:00/00:00";
                 });
 
             });
 
-        }
+        });
 
+    });
+}
 
-        )
+document.querySelectorAll(".songslist li").forEach(function (item) {
+
+    item.addEventListener("click", function () {
+
+        let track = item.dataset.song;
+
+        currentAudio.src = `${currfolder}/${track.replace("/", "")}`;
+        currentAudio.play();
+        play.src = "pause.svg";
+
+        document.querySelector(".playbar .songinfo").innerHTML =
+            cleanSongName(track);
     });
 
-};
+});
+
+;
 
 // MAIN
 
 async function main() {
-    songs = await getsong("/songs/playlist");
+    songs = await getsong("playlist");
 
     let songUL = document.querySelector(".songslist ul");
     songUL.innerHTML = "";
@@ -199,8 +189,9 @@ async function main() {
 
         item.addEventListener("click", function () {
 
-            let track = item.dataset.song;
-            currentAudio.src = currfolder + "/" + track.replace("/", "");
+            let track = this.dataset.song;
+
+            currentAudio.src = `${currfolder}/${track.replace("/", "")}`;
 
             currentAudio.play();
 
@@ -213,7 +204,6 @@ async function main() {
         });
 
     });
-
 
     // PLAY BUTTON
     play.addEventListener("click", function () {
